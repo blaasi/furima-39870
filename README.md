@@ -5,7 +5,6 @@
 | - | - | - |
 | nickname | string | null: false |
 | email | string | null: false, unique: true |
-| password | string | null: false |
 | encrypted_password | string | null: false |
 | last_name | string | null: false |
 | first_name | string | null: false |
@@ -24,24 +23,29 @@
 | - | - | - |
 | name | string | null: false |
 | explanation | text | null: false |
-| category | string | null: false |
-| status | string | null: false |
-| shipping_cost_payer | string | null: false |
-| origin_region | string | null: false |
-| days_until_shipping | string | null: false |
+| category_id | integer | null: false |
+| status_id | integer | null: false |
+| shipping_cost_payer_id | integer | null: false |
+| origin_region_id | integer | null: false |
+| days_until_shipping_id | integer | null: false |
 | sale_price | integer | null: false |
-| seller_id | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :order
+- belongs_to :category
+- belongs_to :status
+- belongs_to :shipping_cost_payer
+- belongs_to :origin_region
+- belongs_to :days_until_shipping
 
 
 ## Orders テーブル
 | Column | Type  | Options  |
 | - | - | - |
-| item_id | references | null: false, foreign_key: true |
-| Buyer_id | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -49,15 +53,17 @@
 - has_one :shipping_address
 
 
-## Shipping_address テーブル
+## Shipping_addresses テーブル
 | Column | Type  | Options  |
 | - | - | - |
 | postcode | string | null: false |
-| prefecture | string | null: false |
+| origin_region_id | integer | null: false |
 | city | string | null: false |
 | street_address | string | null: false |
 | building_name | string |  |
-| telephone_number | integer | null: false |
+| telephone_number | string | null: false |
+| order | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
+- belongs_to :origin_region
