@@ -9,10 +9,13 @@ class Item < ApplicationRecord
   belongs_to :OriginRegion
   belongs_to :DaysUntilShipping
 
-
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :explanation, presence: true
+with_options presence: true do
+  validates :image
+  validates :name
+  validates :explanation
+  validates :sale_price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 },
+  format: { with: /\A[0-9]+\z/ }
+end
 
   with_options presence: true, numericality: { other_than: 1 , message: "can't be blank"} do
   validates :category_id
@@ -22,6 +25,5 @@ class Item < ApplicationRecord
   validates :days_until_shipping_id
   end
   
-  validates :sale_price, presence: true
 
 end
