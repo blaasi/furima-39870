@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
-  
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :Category
   belongs_to :Status
@@ -9,20 +9,18 @@ class Item < ApplicationRecord
   belongs_to :OriginRegion
   belongs_to :DaysUntilShipping
 
-with_options presence: true do
-  validates :image
-  validates :name
-  validates :explanation
-  validates :sale_price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-end
-
-  with_options presence: true, numericality: { other_than: 1 , message: "can't be blank"} do
-  validates :category_id
-  validates :status_id
-  validates :shipping_cost_payer_id
-  validates :origin_region_id
-  validates :days_until_shipping_id
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :explanation
+    validates :sale_price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   end
-  
 
+  with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
+    validates :category_id
+    validates :status_id
+    validates :shipping_cost_payer_id
+    validates :origin_region_id
+    validates :days_until_shipping_id
+  end
 end

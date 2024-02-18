@@ -35,22 +35,22 @@ RSpec.describe Item, type: :model do
       it 'sale_priceが300円未満では登録できない' do
         @item.sale_price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sale price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Sale price must be greater than or equal to 300')
       end
       it 'sale_priceが10,000,000円以上では登録できない' do
-        @item.sale_price = 10000000
+        @item.sale_price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sale price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Sale price must be less than or equal to 9999999')
       end
       it 'sale_priceが全角数字では登録できない' do
         @item.sale_price = '５０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sale price is not a number")
+        expect(@item.errors.full_messages).to include('Sale price is not a number')
       end
       it 'sale_priceに小数点が含まれるとでは登録できない' do
         @item.sale_price = 5000.555
         @item.valid?
-        expect(@item.errors.full_messages).to include("Sale price must be an integer")
+        expect(@item.errors.full_messages).to include('Sale price must be an integer')
       end
       it 'category_idが1では登録できない' do
         @item.category_id = 1
@@ -80,7 +80,7 @@ RSpec.describe Item, type: :model do
       it 'userが紐付いていない場合は登録できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
