@@ -6,10 +6,6 @@ window.addEventListener('turbo:load', () => {
     const taxAmount = inputValue * taxRate;
     const saleProfit = inputValue - taxAmount;
 
-    console.log(inputValue);
-    console.log(taxAmount);
-    console.log(saleProfit);
-
   const addTaxDom = document.getElementById("add-tax-price");
   const saleProfitDom = document.getElementById("profit");
 
