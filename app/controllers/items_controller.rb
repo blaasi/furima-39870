@@ -42,15 +42,15 @@ class ItemsController < ApplicationController
   end
 
   def move_to_new_user_session_path
-    unless user_signed_in?
-      redirect_to root_path
-    end
+    return if user_signed_in?
+
+    redirect_to root_path
   end
 
   def move_to_root_path
-    unless current_user == @item.user
-      redirect_to root_path
-    end
+    return if current_user == @item.user
+
+    redirect_to root_path
   end
 
   def item_params
