@@ -19,7 +19,7 @@
         ¥ <%= @item.sale_price %>
       </span>
       <span class="item-postage">
-        <%= ShippingCostPayer.data.find{|hash| hash[:id] == @item.shipping_cost_payer_id}[:name] %>
+        <%= @item.shipping_cost_payer.name %>
       </span>
     </div>
 
@@ -47,23 +47,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= Category.data.find{|hash| hash[:id] == @item.category_id}[:name] %></td>
+          <td class="detail-value"><%= @item.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= Status.data.find{|hash| hash[:id] == @item.status_id}[:name] %></td>
+          <td class="detail-value"><%= @item.status.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= ShippingCostPayer.data.find{|hash| hash[:id] == @item.shipping_cost_payer_id}[:name] %></td>
+          <td class="detail-value"><%= @item.shipping_cost_payer.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= OriginRegion.data.find{|hash| hash[:id] == @item.origin_region_id}[:name] %></td>
+          <td class="detail-value"><%= @item.origin_region.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= DaysUntilShipping.data.find{|hash| hash[:id] == @item.days_until_shipping_id}[:name] %></td>
+          <td class="detail-value"><%= @item.days_until_shipping.name %></td>
         </tr>
       </tbody>
     </table>
@@ -102,7 +102,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= Category.data.find{|hash| hash[:id] == @item.category_id}[:name] %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
