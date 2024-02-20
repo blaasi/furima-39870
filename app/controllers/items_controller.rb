@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_root_path
-    return if current_user == @item.user
+    return if current_user == @item.user && !@item.sold_out?
 
     redirect_to root_path
   end
