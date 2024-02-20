@@ -50,10 +50,10 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :shipping_address
+- has_one :address
 
 
-## Shipping_addresses テーブル
+## Addresses テーブル
 | Column | Type  | Options  |
 | - | - | - |
 | postcode | string | null: false |
