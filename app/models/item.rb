@@ -24,4 +24,9 @@ class Item < ApplicationRecord
     validates :origin_region_id
     validates :days_until_shipping_id
   end
+
+  def sold_out?
+    Order.exists?(item_id: self.id)
+  end
+
 end
