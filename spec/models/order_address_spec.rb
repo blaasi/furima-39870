@@ -4,11 +4,10 @@ RSpec.describe OrderAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
-    @order_address = FactoryBot.build(:order_address, user_id: user.id,item_id: item.id)
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入情報の保存' do
-
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_address).to be_valid
@@ -28,7 +27,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'postcodeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_address.postcode = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+        expect(@order_address.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
       it 'origin_regionを選択していないと保存できないこと' do
         @order_address.origin_region_id = '1'
@@ -53,17 +52,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'telephone_numberが半角数字以外だと保存できないこと' do
         @order_address.telephone_number = '０９０１２３４５６７８'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Telephone number Only half-width numeric values with 10 to 11 digits are allowed.")
+        expect(@order_address.errors.full_messages).to include('Telephone number Only half-width numeric values with 10 to 11 digits are allowed.')
       end
       it 'telephone_numberが9桁だと保存できないこと' do
         @order_address.telephone_number = '090123456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Telephone number Only half-width numeric values with 10 to 11 digits are allowed.")
+        expect(@order_address.errors.full_messages).to include('Telephone number Only half-width numeric values with 10 to 11 digits are allowed.')
       end
       it 'telephone_numberが12桁だと保存できないこと' do
         @order_address.telephone_number = '090123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Telephone number Only half-width numeric values with 10 to 11 digits are allowed.")
+        expect(@order_address.errors.full_messages).to include('Telephone number Only half-width numeric values with 10 to 11 digits are allowed.')
       end
       it 'user_idが紐付いていないと保存できないこと' do
         @order_address.user_id = nil
@@ -80,7 +79,6 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
-
     end
   end
 end
