@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :move_to_root_path, only: [:index]
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new
   end
 
@@ -29,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_3005b701cafb23c7db0d0432"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.sale_price,
       card: order_params[:token],
