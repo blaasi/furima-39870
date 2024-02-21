@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -22,5 +23,9 @@ class Item < ApplicationRecord
     validates :shipping_cost_payer_id
     validates :origin_region_id
     validates :days_until_shipping_id
+  end
+
+  def sold_out?
+    Order.exists?(item_id: id)
   end
 end
